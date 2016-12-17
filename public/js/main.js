@@ -1,41 +1,47 @@
-String.prototype.replaceAt=function(index, character) {
-    return this.substr(0, index) + character + this.substr(index+character.length);
+function On(){
+  $.ajax({
+          type: 'GET',
+          url: 'http://192.168.43.198:3000/on',
+          dataType: 'application/json'
+        });   // Ajax Call
 }
 
-$(function() {
-  var video = $('#videoPlayer');
+function Off(){
+  $.ajax({
+          type: 'GET',
+          url: 'http://192.168.43.198:3000/off',
+          dataType: 'application/json'
+        });   // Ajax Call
+}
 
-  function resizeVideo() {
-    video.css({
-      // width: $(window).width(),
-      height: $(window).height()
-    })
-  }
+function Left(){
+  $.ajax({
+          type: 'GET',
+          url: 'http://192.168.43.198:3000/left',
+          dataType: 'application/json'
+        });   // Ajax Call
+}
 
-  $(document).ready(function(){
-    resizeVideo();
+function Right(){
+  $.ajax({
+          type: 'GET',
+          url: 'http://192.168.43.198:3000/right',
+          dataType: 'application/json'
+        });   // Ajax Call
+}
 
-    var ws       = new WebSocket('ws://' + window.location.host + window.location.pathname);
-    ws.onopen    = function()  { console.log('websocket opened2'); };
-    ws.onclose   = function()  { console.log('websocket closed'); }
-    ws.onmessage = function(m) { console.log('websocket message: ' +  m.data); };
+function Forward(){
+  $.ajax({
+          type: 'GET',
+          url: 'http://192.168.43.198:3000/forward',
+          dataType: 'application/json'
+        });   // Ajax Call
+}
 
-    var pressedControls = "0000000000";
-    $('.controls').each(function() {
-      $(this).mousedown(function() {
-        index = parseInt($(this).attr('data-key'));
-        pressedControls = pressedControls.replaceAt(index, "1");
-        console.log(pressedControls);
-      });
-      $(this).mouseup(function() {
-        index = parseInt($(this).attr('data-key'));
-        pressedControls = pressedControls.replaceAt(index, "0");
-        console.log(pressedControls);
-      });
-    });
-  });
-
-  $(window).resize(function() {
-    resizeVideo();
-  })
-});
+function Reverse(){
+  $.ajax({
+          type: 'GET',
+          url: 'http://192.168.43.198:3000/reverse',
+          dataType: 'application/json'
+        });   // Ajax Call
+}
